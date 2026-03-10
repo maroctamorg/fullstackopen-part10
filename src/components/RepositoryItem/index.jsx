@@ -1,7 +1,8 @@
 import { Image, StyleSheet, View } from 'react-native';
 
-import Text from './Text';
-import theme from '../theme';
+import theme from '../../theme';
+import Text from '../Text';
+import Stat from './Stat';
 
 const styles = StyleSheet.create({
   container: {
@@ -61,19 +62,6 @@ const formatCount = (count) => {
   return String(count);
 };
 
-const Stat = ({ label, value }) => {
-  return (
-    <View style={styles.statItem}>
-      <Text fontWeight="bold" style={styles.statValue}>
-        {formatCount(value)}
-      </Text>
-      <Text color="textSecondary" style={styles.statLabel}>
-        {label}
-      </Text>
-    </View>
-  );
-};
-
 const RepositoryItem = ({ item }) => {
   return (
     <View style={styles.container}>
@@ -91,10 +79,10 @@ const RepositoryItem = ({ item }) => {
       </View>
 
       <View style={styles.statsRow}>
-        <Stat label="Stars" value={item.stargazersCount} />
-        <Stat label="Forks" value={item.forksCount} />
-        <Stat label="Reviews" value={item.reviewCount} />
-        <Stat label="Rating" value={item.ratingAverage} />
+        <Stat label="Stars" value={item.stargazersCount} formatCount={formatCount} styles={styles} />
+        <Stat label="Forks" value={item.forksCount} formatCount={formatCount} styles={styles} />
+        <Stat label="Reviews" value={item.reviewCount} formatCount={formatCount} styles={styles} />
+        <Stat label="Rating" value={item.ratingAverage} formatCount={formatCount} styles={styles} />
       </View>
     </View>
   );
