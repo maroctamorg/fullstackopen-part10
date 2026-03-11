@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const repositories = useRepositories();
-
-const respositoryNodes = repositories
-  ? repositories.edges.map((edge) => edge.node)
-  : [];
-
 const RepositoryList = () => {
+  const { repositories } = useRepositories();
+
+  const respositoryNodes = repositories
+    ? repositories.edges.map((edge) => edge.node)
+    : [];
+
   return (
     <FlatList
       data={respositoryNodes}
