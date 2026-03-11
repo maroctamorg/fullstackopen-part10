@@ -24,6 +24,14 @@ module.exports = [
       globals: reactNativeGlobals,
     },
     rules: {
+      "no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+        },
+      ],
       "react/prop-types": "off",
       "react/react-in-jsx-scope": "off",
     },
