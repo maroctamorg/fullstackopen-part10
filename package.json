@@ -22,7 +22,9 @@
     "transformIgnorePatterns": [
       "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|react-router-native)"
     ],
-    "setupFilesAfterEnv": ["<rootDir>/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>/setupTests.js"
+    ]
   },
   "dependencies": {
     "@apollo/client": "^4.1.6",
@@ -39,6 +41,7 @@
     "react-native": "0.81.5",
     "react-native-web": "^0.21.0",
     "react-router-native": "^6.30.3",
+    "rxjs": "^7.8.2",
     "yup": "^1.7.1"
   },
   "devDependencies": {
