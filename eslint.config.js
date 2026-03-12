@@ -1,5 +1,6 @@
 const js = require("@eslint/js");
 const babelParser = require("@babel/eslint-parser");
+const jestPlugin = require("eslint-plugin-jest");
 const reactPlugin = require("eslint-plugin-react");
 const reactNativePlugin = require("eslint-plugin-react-native");
 
@@ -19,6 +20,7 @@ module.exports = [
         version: "detect",
       },
     },
+    files: ["**/*.{js,jsx}"],
     languageOptions: {
       parser: babelParser,
       globals: reactNativeGlobals,
@@ -35,5 +37,9 @@ module.exports = [
       "react/prop-types": "off",
       "react/react-in-jsx-scope": "off",
     },
+  },
+  {
+    ...jestPlugin.configs["flat/recommended"],
+    files: ["src/**/__tests__/**/*.{js,jsx}", "src/**/*.{test,spec}.{js,jsx}"],
   },
 ];

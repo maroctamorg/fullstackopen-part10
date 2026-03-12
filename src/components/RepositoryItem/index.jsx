@@ -1,8 +1,8 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from "react-native";
 
-import theme from '../../theme';
-import Text from '../Text';
-import Stat from './Stat';
+import theme from "../../theme";
+import Text from "../Text";
+import Stat from "./Stat";
 
 const styles = StyleSheet.create({
   container: {
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   header: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 16,
   },
   avatar: {
@@ -30,21 +30,21 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   language: {
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     backgroundColor: theme.colors.primary,
     color: theme.colors.textContrast,
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 4,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   statItem: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   statValue: {
     marginBottom: 4,
@@ -64,7 +64,7 @@ const formatCount = (count) => {
 
 const RepositoryItem = ({ item }) => {
   return (
-    <View style={styles.container}>
+    <View testID="repositoryItem" style={styles.container}>
       <View style={styles.header}>
         <Image source={{ uri: item.ownerAvatarUrl }} style={styles.avatar} />
         <View style={styles.details}>
@@ -79,10 +79,30 @@ const RepositoryItem = ({ item }) => {
       </View>
 
       <View style={styles.statsRow}>
-        <Stat label="Stars" value={item.stargazersCount} formatCount={formatCount} styles={styles} />
-        <Stat label="Forks" value={item.forksCount} formatCount={formatCount} styles={styles} />
-        <Stat label="Reviews" value={item.reviewCount} formatCount={formatCount} styles={styles} />
-        <Stat label="Rating" value={item.ratingAverage} formatCount={formatCount} styles={styles} />
+        <Stat
+          label="Stars"
+          value={item.stargazersCount}
+          formatCount={formatCount}
+          styles={styles}
+        />
+        <Stat
+          label="Forks"
+          value={item.forksCount}
+          formatCount={formatCount}
+          styles={styles}
+        />
+        <Stat
+          label="Reviews"
+          value={item.reviewCount}
+          formatCount={formatCount}
+          styles={styles}
+        />
+        <Stat
+          label="Rating"
+          value={item.ratingAverage}
+          formatCount={formatCount}
+          styles={styles}
+        />
       </View>
     </View>
   );
