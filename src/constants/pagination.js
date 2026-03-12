@@ -1,0 +1,2 @@
+export const PAGINATION_FIRST_DEFAULT = 5;
+export const ON_END_REACHED_THRESHOLD_DEFAULT = 0.5;

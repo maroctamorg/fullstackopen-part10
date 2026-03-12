@@ -1,6 +1,7 @@
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
 import Constants from "expo-constants";
 import { useApolloClient, useQuery } from "@apollo/client/react";
+import { useNavigate } from "react-router-native";
 
 import theme from "../../theme";
 import AppBarTab from "./AppBarTab";
@@ -24,13 +25,13 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
-  const { data } = useQuery(ME, {
-    fetchPolicy: "cache-and-network",
-  });
+  const navigate = useNavigate();
+  const { data } = useQuery(ME);
 
   const handleSignOut = async () => {
     await authStorage.removeAccessToken();
     await apolloClient.resetStore();
+    navigate("/");
   };
 
   const isSignedIn = Boolean(data?.me);

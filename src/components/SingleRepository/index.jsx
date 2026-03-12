@@ -1,8 +1,11 @@
 import { FlatList, Linking, StyleSheet } from "react-native";
-import { useQuery } from "@apollo/client/react";
 import { useParams } from "react-router-native";
 
-import { GET_REPOSITORY } from "../../graphql/queries/repository";
+import {
+  ON_END_REACHED_THRESHOLD_DEFAULT,
+  PAGINATION_FIRST_DEFAULT,
+} from "../../constants/pagination";
+import useReviews from "../../hooks/useReviews";
 import RepositoryItem from "../RepositoryItem";
 import ReviewItem from "../ReviewItem";
 import ItemSeparator from "../RepositoryList/ItemSeparator";
@@ -23,17 +26,16 @@ const RepositoryInfo = ({ repository }) => (
 
 const SingleRepository = () => {
   const { id } = useParams();
-  const { data } = useQuery(GET_REPOSITORY, {
-    variables: { id },
-    fetchPolicy: "cache-and-network",
+  const { repository, reviews, fetchMore } = useReviews({
+    repositoryId: id,
+    first: PAGINATION_FIRST_DEFAULT,
   });
 
-  const repository = data?.repository;
-  const reviews = repository?.reviews?.edges?.map((edge) => edge.node) || [];
+  const reviewNodes = reviews?.edges?.map((edge) => edge.node) || [];
 
   return (
     <FlatList
-      data={reviews}
+      data={reviewNodes}
       renderItem={({ item }) => (
         <ReviewItem review={item} title={item.user.username} />
       )}
@@ -42,6 +44,8 @@ const SingleRepository = () => {
         repository ? <RepositoryInfo repository={repository} /> : null
       }
       ItemSeparatorComponent={() => <ItemSeparator style={styles.separator} />}
+      onEndReached={fetchMore}
+      onEndReachedThreshold={ON_END_REACHED_THRESHOLD_DEFAULT}
     />
   );
 };

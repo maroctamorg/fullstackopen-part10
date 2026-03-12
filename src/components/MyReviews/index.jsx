@@ -38,7 +38,6 @@ const MyReviews = () => {
   const navigate = useNavigate();
   const { data, refetch } = useQuery(ME, {
     variables: { includeReviews: true },
-    fetchPolicy: "cache-and-network",
   });
   const [deleteReview] = useMutation(DELETE_REVIEW);
 

@@ -1,6 +1,6 @@
-import React from "react";
 import { FlatList, Pressable, StyleSheet } from "react-native";
 
+import { ON_END_REACHED_THRESHOLD_DEFAULT } from "../../constants/pagination";
 import RepositoryItem from "../RepositoryItem";
 import ItemSeparator from "./ItemSeparator";
 import RepositoryListHeader from "./RepositoryListHeader";
@@ -18,6 +18,7 @@ const RepositoryListContainer = ({
   setSearchKeyword,
   selectedOrder,
   setSelectedOrder,
+  onEndReach,
 }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
@@ -43,6 +44,8 @@ const RepositoryListContainer = ({
       )}
       keyExtractor={(item) => item.id}
       ListHeaderComponent={listHeader}
+      onEndReached={onEndReach}
+      onEndReachedThreshold={ON_END_REACHED_THRESHOLD_DEFAULT}
     />
   );
 };

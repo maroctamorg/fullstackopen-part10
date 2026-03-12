@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-native";
 import { useDebounce } from "use-debounce";
 
+import { PAGINATION_FIRST_DEFAULT } from "../../constants/pagination";
 import useRepositories from "../../hooks/useRepositories";
 import RepositoryListContainer from "./RepositoryListContainer";
 
@@ -17,10 +18,15 @@ const RepositoryList = () => {
     lowest: { orderBy: "RATING_AVERAGE", orderDirection: "ASC" },
   };
 
-  const { repositories } = useRepositories({
+  const { repositories, fetchMore } = useRepositories({
     ...orderingVariables[selectedOrder],
+    first: PAGINATION_FIRST_DEFAULT,
     searchKeyword: debouncedSearchKeyword,
   });
+
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return (
     <RepositoryListContainer
@@ -30,6 +36,7 @@ const RepositoryList = () => {
       setSearchKeyword={setSearchKeyword}
       selectedOrder={selectedOrder}
       setSelectedOrder={setSelectedOrder}
+      onEndReach={onEndReach}
     />
   );
 };
