@@ -1,21 +1,25 @@
 import { gql } from "@apollo/client";
 
-export const ME = gql`
-  query Me($includeReviews: Boolean = false) {
-    me {
+export const GET_REPOSITORY = gql`
+  query GetRepository($id: ID!) {
+    repository(id: $id) {
       id
-      username
-      reviews @include(if: $includeReviews) {
+      fullName
+      description
+      language
+      forksCount
+      stargazersCount
+      ratingAverage
+      reviewCount
+      ownerAvatarUrl
+      url
+      reviews {
         edges {
           node {
             id
             text
             rating
             createdAt
-            repository {
-              id
-              fullName
-            }
             user {
               id
               username

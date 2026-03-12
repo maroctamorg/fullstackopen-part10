@@ -44,11 +44,22 @@ const AppBar = () => {
       >
         <AppBarTab to="/" label="Repositories" style={styles.tab} />
         {isSignedIn ? (
-          <Pressable onPress={handleSignOut} style={styles.tab}>
-            <AppBarTab label="Sign out" />
-          </Pressable>
+          <>
+            <AppBarTab
+              to="/create-review"
+              label="Create a review"
+              style={styles.tab}
+            />
+            <AppBarTab to="/my-reviews" label="My reviews" style={styles.tab} />
+            <Pressable onPress={handleSignOut} style={styles.tab}>
+              <AppBarTab label="Sign out" />
+            </Pressable>
+          </>
         ) : (
-          <AppBarTab to="/signin" label="Sign in" style={styles.tab} />
+          <>
+            <AppBarTab to="/signin" label="Sign in" style={styles.tab} />
+            <AppBarTab to="/signup" label="Sign up" style={styles.tab} />
+          </>
         )}
       </ScrollView>
     </View>

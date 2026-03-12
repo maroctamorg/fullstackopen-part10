@@ -1,10 +1,37 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-native";
+import { useDebounce } from "use-debounce";
+
 import useRepositories from "../../hooks/useRepositories";
 import RepositoryListContainer from "./RepositoryListContainer";
 
 const RepositoryList = () => {
-  const { repositories } = useRepositories();
+  const navigate = useNavigate();
+  const [selectedOrder, setSelectedOrder] = useState("latest");
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [debouncedSearchKeyword] = useDebounce(searchKeyword, 500);
 
-  return <RepositoryListContainer repositories={repositories} />;
+  const orderingVariables = {
+    latest: { orderBy: "CREATED_AT", orderDirection: "DESC" },
+    highest: { orderBy: "RATING_AVERAGE", orderDirection: "DESC" },
+    lowest: { orderBy: "RATING_AVERAGE", orderDirection: "ASC" },
+  };
+
+  const { repositories } = useRepositories({
+    ...orderingVariables[selectedOrder],
+    searchKeyword: debouncedSearchKeyword,
+  });
+
+  return (
+    <RepositoryListContainer
+      repositories={repositories}
+      onRepositoryPress={(id) => navigate(`/repositories/${id}`)}
+      searchKeyword={searchKeyword}
+      setSearchKeyword={setSearchKeyword}
+      selectedOrder={selectedOrder}
+      setSelectedOrder={setSelectedOrder}
+    />
+  );
 };
 
 export default RepositoryList;
